@@ -45,15 +45,15 @@ func manejaRutas() {
 
 func retornaRequests(writer http.ResponseWriter, httpRequest *http.Request){
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-    fmt.Println("Detalle de endpoint: retornaRequests")
-    json.NewEncoder(writer).Encode(KNNRequests)
+    	fmt.Println("Detalle de endpoint: retornaRequests")
+    	json.NewEncoder(writer).Encode(KNNRequests)
 }
 
 func crearRequest(writer http.ResponseWriter, httpRequest *http.Request) {
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-    contenidoReq, _ := ioutil.ReadAll(httpRequest.Body)
+   	contenidoReq, _ := ioutil.ReadAll(httpRequest.Body)
 	var nuevoRequest KNNRequest 
-    json.Unmarshal(contenidoReq, &nuevoRequest)
+   	json.Unmarshal(contenidoReq, &nuevoRequest)
 	KNNRequests = nuevoRequest
 	prediccionesCorrectas, prediccionesTotales, precisionFinal, entrenadas, testeadas := knn.AlgoritmoKNN(nuevoRequest.Url, nuevoRequest.Cols, nuevoRequest.KNeighbors)
 	fmt.Println(prediccionesCorrectas, prediccionesTotales, precisionFinal, entrenadas, testeadas)
@@ -63,8 +63,8 @@ func crearRequest(writer http.ResponseWriter, httpRequest *http.Request) {
 
 func retornaResultados(writer http.ResponseWriter, httpRequest *http.Request){
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
-    fmt.Println("Detalle de endpoint: retornaResultados")
-    json.NewEncoder(writer).Encode(KNNResults)
+    	fmt.Println("Detalle de endpoint: retornaResultados")
+   	json.NewEncoder(writer).Encode(KNNResults)
 }
 
 func main() {
